@@ -9,8 +9,8 @@ let team = `команда`;
 let howMuch = 'Сколько';
 let sentence = 'нужно программистов чтобы сделать проект ?';
 
-let task1 = howMuch + " " + sentence.replace("проект", project) + " " + numbers[0] + ", " +numbers[1]+ ", "+ team;
-console.log(task1);
+let task1 = ` ${howMuch}  ${sentence.replace("проект", project)} ${numbers[0]},  ${numbers[1]}, ${team} `;
+// console.log(task1);
 /*
  2. Составьте предложение из представленного массива
  и выведите предложение в консоль;
@@ -31,25 +31,28 @@ let array = [
   'не'
 ];
 
-let homeSentence = array[4] + ", " + array[2] + ", " + array[6] + " " + array[8] + " " + array[7] + ". \n" + array[0] +" " + array[3] + " " + array[1] +array[5];
+let homeSentence = ` ${array[4]}, ${array[2]}, ${array[6]} ${array[8]} ${array[7]}
+${array[0]} ${array[3]} ${array[1]} ${array[5]}`;
 // console.log(homeSentence);
 /*
  3. Добавьте свойста 4 новых свойства в объект используя
     квадратные скобки и точку.
  */
-
+const fff = 222;
 let myObj = {};
 myObj.first = 1111;
 myObj.second = ["Hello"];
 myObj.second[1] = "World";
 myObj.therd = 1111;
 myObj.fortse = 1111;
+myObj[fff] = 2222;
 
+// console.log(myObj);
 /*
  5. Преобразуйте строку x,
     в максимально удобно читаемый для программиста вид
  */
 
 let frameworks = [4.7, 'Angular', '6Angular', 'React/Redux'];
-let x ='google\ released ' +'new version\ ' + frameworks[1] +Math.floor(frameworks[0]) +
-  '\ But real speed is ' +`${frameworks[frameworks.length - 1]}`;
+let x =`google released new version ${frameworks[1]} ${Math.floor(frameworks[0])} But real speed is ${frameworks[frameworks.length - 1]}`;
+console.log(x);
