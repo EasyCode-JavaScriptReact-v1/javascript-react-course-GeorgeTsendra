@@ -8,16 +8,16 @@
  *
  * */
 
-let y = 5;
-let x = () => y;
-
-let z = t => {
-  let y = 5;
-  t();
-};
-console.log(y);
-
-console.log(z(x)); // в ф-ции z внутри принимает как аргумент ф-цию и запускает ее. не возвращает ничего!!
+// let y = 5;
+// let x = () => y;
+//
+// let z = t => {
+//   let y = 5;
+//   t();
+// };
+// console.log(y);
+//
+// console.log(z(x)); // в ф-ции z внутри принимает как аргумент ф-цию и запускает ее. не возвращает ничего!!
 
 /*
  *
@@ -28,14 +28,14 @@ console.log(z(x)); // в ф-ции z внутри принимает как ар
  *
  * */
 
-let $ = (a)=> {
-  return `<${a}></${a}>`
-};
-
-let createBODY = $('body');
-let createDIV = $('div');
-console.log(createBODY); // <body></body>
-console.log(createDIV); // <div></div>
+// let $ = (a)=> {
+//   return `<${a}></${a}>`
+// };
+//
+// let createBODY = $('body');
+// let createDIV = $('div');
+// console.log(createBODY); // <body></body>
+// console.log(createDIV); // <div></div>
 
 /*
  *
@@ -49,32 +49,36 @@ console.log(createDIV); // <div></div>
  * */
 
 
-
+// version 2
 var ezjQuery = {
   innerAray : [],
 
+  add(a, b){
+    let startString = `<${a}>`;
+    let endString = `</${a}>`;
+
+    this.innerAray.splice(this.innerAray.length/2, 0,startString,endString);
+    if (b) {
+      this.innerAray.splice(this.innerAray.length/2, 0, b);
+    }
+
+    return this.innerAray.join("");
+  },
+
+  render(){
+    return this.innerAray = [];
+  },
+
 };
 
-ezjQuery.add =(a, b)=>{
-  let startString = `<${a}>`;
-  let endString = `</${a}>`;
-
-  ezjQuery.innerAray.splice(ezjQuery.innerAray.length/2, 0,startString,endString);
-  if (b) {
-    ezjQuery.innerAray.splice(ezjQuery.innerAray.length/2, 0, b);
-  }
-  //
-  return ezjQuery.innerAray.join("");
-}
-
-ezjQuery.render =()=> {
-return ezjQuery.innerAray = [];
-}
+console.log(ezjQuery.add('body')); // <body></body>
+console.log(ezjQuery.add('div')); // <body></body><div></div>
+console.log(ezjQuery.add('h1', 'Hello')); // <body></body><div></div><h1></h1>
+ezjQuery.render();
 
 console.log(ezjQuery.add('body', )); // <body></body>
 console.log(ezjQuery.add('div')); // <body></body><div></div>
-console.log(ezjQuery.add('h1')); // <body></body><div></div><h1></h1>
-// ezjQuery.render();
+console.log(ezjQuery.add('h1', 'Hello')); // <body></body><div></div><h1></h1>
 /*
  *
  * TASK 3
@@ -90,12 +94,12 @@ console.log(ezjQuery.add('h1')); // <body></body><div></div><h1></h1>
  */
 
 // example
-var helloList
-   ezjQuery.add('body') // <body></body>
-  helloList = ezjQuery.add('div') // <body><div></div></body>
-  ezjQuery.add('ul') // <body><div><ul></ul></div></body>
-  ezjQuery.add('li', 'Hello') //<body><div><ul><li>Hello</li></ul></div></body>
-  ezjQuery.render();
+// var helloList
+//    ezjQuery.add('body') // <body></body>
+//   helloList = ezjQuery.add('div') // <body><div></div></body>
+//   ezjQuery.add('ul') // <body><div><ul></ul></div></body>
+//   console.log(ezjQuery.add('li', 'Hello')) //<body><div><ul><li>Hello</li></ul></div></body>
+//   ezjQuery.render();
 // console.log(helloList); // <body><div><ul><li>Hello</li></ul></div></body>
 //  // Обратите внимание, что после вызова render создание строки началось сначала
 //
@@ -107,7 +111,7 @@ var helloList
 
 // Для выполнивших все задания
 // сделайте document.write(helloList) увидите результат :)
-document.write(helloList);
+// document.write(helloList);
 // @SUPER
 /*
  * Переименуйте объект ezjQuery в $.
