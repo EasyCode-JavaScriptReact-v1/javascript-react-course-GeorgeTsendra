@@ -48,20 +48,27 @@ let firstThreeNumb = `${numb[0]}${numb[1]}${numb[2]}`;
 let secondTwoNumb = `${numb[3]}${numb[4]}`;
 let therdTwoNumb = `${numb[5]}${numb[6]}`;
 let fourthThreeNumb = `${numb[7]}${numb[8]}${numb[9]}`;
+let readyNumb = `(${firstThreeNumb})${secondTwoNumb}-${therdTwoNumb}-${fourthThreeNumb}`;
 //формируем ID по длине массива + 1
 let correctId = this.dataBase.length+1;
 
-this.dataBase.push({id:correctId,name:name,thername:thername,numb:`(${firstThreeNumb})${secondTwoNumb}-${therdTwoNumb}-${fourthThreeNumb}`})
+this.dataBase.push({id:correctId,name:name,thername:thername,numb:readyNumb}) // now it is not so long ;)
 }
 
 
-PhoneApp.prototype.usersRemoving = function(username) {
-  this.dataBase.forEach((value, index, arr)=> {
-    if (value.name === username) {
-      delete this.dataBase[index];
 
-    }else if(value.thername === username){
-      delete this.dataBase[index];
+PhoneApp.prototype.usersRemovingByThernameAndName = function(username) {
+  this.dataBase.forEach((value) => {
+    if (value.name == username) {
+      this.dataBase = this.dataBase.filter((value) => {
+        return value.name != username
+      })
+    }
+    if (value.thername == username) {
+      this.dataBase = this.dataBase.filter((value) => {
+
+        return value.thername != username
+      })
     }
   })
 }
@@ -96,11 +103,12 @@ PhoneApp.prototype.changeUsers = function(userId, name, thername, numb) {
  let secondTwoNumb = `${numb[3]}${numb[4]}`;
  let therdTwoNumb = `${numb[5]}${numb[6]}`;
  let fourthThreeNumb = `${numb[7]}${numb[8]}${numb[9]}`;
+ let readyNumb = `(${firstThreeNumb})${secondTwoNumb}-${therdTwoNumb}-${fourthThreeNumb}`;
 
  this.dataBase.forEach((value, index, arr)=> {
    let correctId = index + 1;
    if (value.id == userId) {
-     this.dataBase[index] = {id:correctId,name:name,thername:thername,numb:`(${firstThreeNumb})${secondTwoNumb}-${therdTwoNumb}-${fourthThreeNumb}`};
+     this.dataBase[index] = {id:correctId,name:name,thername:thername,numb:readyNumb};// now it is not so long ;)
    };
  });
 }
@@ -117,7 +125,6 @@ PhoneApp.prototype.sortUsers = function(property) {
 PhoneApp.prototype.filterUsers = function(property) {
   let filteredArray = []
      this.dataBase.filter((value,index,arr)=>{
-      // console.log(value[property]);
       filteredArray.push(`${property}: ${value[property]}`);
   })
   console.log(filteredArray);
@@ -126,7 +133,7 @@ PhoneApp.prototype.filterUsers = function(property) {
 const myApp = new PhoneApp();
 myApp.editUser(`Petiya`,`Petrov`, `0993378130`)
 myApp.editUser(`Alex`,`Petrov`, `0093378130`)
-// myApp.filterUsers(`name`)
+// myApp.usersRemovingByThernameAndName('Petrov')
 
 
 
