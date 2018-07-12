@@ -38,7 +38,26 @@ function Http() {};
 
 
 Http.prototype.createServer = function(fn) {
- console.log(fn);
+ let stx = {
+   req: {
+      port: 123,
+      url: `http`,
+   },
+   res: {
+     status: 0,
+     message: `ok`,
+     haeder: {
+       'content-type': `application/json`,
+     }
+
+   }
+
+ }
+
+ this.callback = () => {
+   fn(ctx , ()=>{})
+ }
+ return this;
 }
 
 Http.prototype.listen = function(PORT, host) {
@@ -47,9 +66,9 @@ Http.prototype.listen = function(PORT, host) {
 
 };
 
-// const server = new Http().createServer(function(ctx, next) {
-//     console.log(ctx);
-//   }).listen(3000, 'localhost');
+const server = new Http().createServer(function(ctx, next) {
+    console.log(ctx);
+  }).listen(3000, 'localhost');
 
 
 // server.createServer(function(ctx, next) {
@@ -79,19 +98,32 @@ function Human(name,age,sex,hight,weight) {
 function Worker(sallary, keyshiya) {
   this.sallary = sallary;
   this.workPlace = keyshiya;
-  this.arbeiten = function() {
-    console.log(`arbeite macht frie`);
-  };
+
 }
+
+
+
 function Student(university, scholarship) {
   this.university = university;
   this.scholarship = scholarship;
-  this.lookingOfTVSeries = function() {
-    console.log(`Say: Lannisters always pay their debts`);
-  }
+
 }
-Worker.prototype = new Human();
-Student.prototype = new Human();
+
+
+
+
+Worker.prototype = Object.create(Human.prototype);
+Worker.prototype.constructor = Worker;
+Worker.prototype.arbeiten = function() {
+  console.log(`arbeite macht frie`);
+}
+
+Student.prototype = Object.create(Human.prototype);
+Student.prototype.constructor = Student;
+Student.prototype.lookingOfTVSeries = function() {
+    console.log(`Say: Lannisters always pay their debts`);
+}
+
 let studentExemplar1 = new Student(`HPI`,`-1200`);
 let workerExemplar1 = new Worker(`400$`,`somewhere`);
 let humanExample1 = new Human(`Vasia`,`18`,`man`,`165`,`55`);
