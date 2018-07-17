@@ -1,0 +1,29 @@
+h1, .center {
+  text-align: center;
+}
+
+ .test__question {
+   font-size: 25px;
+   margin-left: 3rem;
+   margin-bottom: 0.5rem;
+    margin-left: 1rem
+ }
+ul>li {
+  list-style: none;
+}
+#input {
+  background-color: #CAE2F7;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  /* width: 10%; */
+
+}
+#submit{
+  height: 8vh;
+  width: 40vh;
+  border: 1px solid #000000;
+  background-color: #CAE2F7;
+}
+#submit:hover{
+  background-color: #01AEF0;
+}
