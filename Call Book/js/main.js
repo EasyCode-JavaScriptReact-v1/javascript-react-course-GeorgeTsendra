@@ -1,36 +1,22 @@
-
-
-
-
-// Приложение телефонный справочник
-//
-// Создайте функцию конструктор.
-// У данной функции должны быть методы:
-//
-// 1 Преобразование телефонного номера из формата 0993378130 в (099) 33-78-130++
-// 2 Проверка, что телефонный номер содержит только числа ++
-// 3 Добавление пользователей в справочник ++
-// 4 Удаление пользователя по имени, фамилии ++
-// 5 Поиск пользователей по имени - отображает всех пользователей с одинаковым именем ++
-// 6 Изменение имени, фамилии, телефонного номера у выбраного пользователя ++
-// 7 Сортировка пользователей по номеру телефона, фамилии, имени и тд, по любому из свойств пользователя++
-// 8 Фильтр по указанному свойству++
-
-
-
-
+/*
+Виртуализировать таблицу, сделать рендер всей
+таблицы через JavaScript.
+Второй макет.
+https://github.com/aleksandra-maslennikova/telephone-book/blob/master/index.html
+Выглядеть должно так же: https://aleksandra-maslennikova.github.io/telephone-book/index.html
+*/
 
 function PhoneApp() {
   this.dataBase = [
-        {id:1, name:'Vasya',thername: "Ivanov",  numb: `(099)33-78-130`},
-        {id:2, name:'Dima', thername: "Ivanov", numb: `(099)33-78-130`},
-        {id:3, name:'Grisha', thername: "Ivanov", numb: `(099)33-78-130`},
-        {id:4, name:'Jora', thername: "Ivanov", numb: `(099)33-78-130`},
-        {id:5, name:'Jora', thername: "Ivanov", numb: `(099)33-78-130`},
+        {id:1, name:'Vasya',surname: "Ivanov",  numb: `(099)33-78-130`},
+        {id:2, name:'Dima', surname: "Ivanov", numb: `(099)33-78-130`},
+        {id:3, name:'Grisha', surname: "Ivanov", numb: `(099)33-78-130`},
+        {id:4, name:'Jora', surname: "Ivanov", numb: `(099)33-78-130`},
+        {id:5, name:'Jora', surname: "Ivanov", numb: `(099)33-78-130`},
     ]
 }
 
-PhoneApp.prototype.editUser = function(name,thername,numb) {
+PhoneApp.prototype.editUser = function(name,surname,numb) {
  // проверяем длину номера
   if (numb.length > 10) {
     console.error(`make correct numb`);
@@ -52,22 +38,22 @@ let readyNumb = `(${firstThreeNumb})${secondTwoNumb}-${therdTwoNumb}-${fourthThr
 //формируем ID по длине массива + 1
 let correctId = this.dataBase.length+1;
 
-this.dataBase.push({id:correctId,name:name,thername:thername,numb:readyNumb}) // now it is not so long ;)
+this.dataBase.push({id:correctId,name:name,surname:surname,numb:readyNumb}) // now it is not so long ;)
 }
 
 
 
-PhoneApp.prototype.usersRemovingByThernameAndName = function(username) {
+PhoneApp.prototype.usersRemovingBySurnameAndName = function(username) {
   this.dataBase.forEach((value) => {
     if (value.name == username) {
       this.dataBase = this.dataBase.filter((value) => {
         return value.name != username
       })
     }
-    if (value.thername == username) {
+    if (value.surname == username) {
       this.dataBase = this.dataBase.filter((value) => {
 
-        return value.thername != username
+        return value.surname != username
       })
     }
   })
@@ -85,7 +71,7 @@ PhoneApp.prototype.searchUsers = function(username) {
   console.log(allUsers);
 }
 
-PhoneApp.prototype.changeUsers = function(userId, name, thername, numb) {
+PhoneApp.prototype.changeUsers = function(userId, name, surname, numb) {
   // проверяем длину номера
    if (numb.length > 10) {
      console.error(`make correct numb`);
@@ -108,7 +94,7 @@ PhoneApp.prototype.changeUsers = function(userId, name, thername, numb) {
  this.dataBase.forEach((value, index, arr)=> {
    let correctId = index + 1;
    if (value.id == userId) {
-     this.dataBase[index] = {id:correctId,name:name,thername:thername,numb:readyNumb};// now it is not so long ;)
+     this.dataBase[index] = {id:correctId,name:name,surname:surname,numb:readyNumb};
    };
  });
 }
@@ -130,10 +116,32 @@ PhoneApp.prototype.filterUsers = function(property) {
   console.log(filteredArray);
 }
 
+PhoneApp.prototype.createElement = function(value, key, index){
+  let td = document.createElement('td');
+  let rtById = document.getElementById(`tr_${index}`)
+  // let rtById = document.querySelectorAll(tagname = "tr")
+  rtById.appendChild(td)
+  td.textContent = value[key]
+}
+
+PhoneApp.prototype.outputDataArray = function() {
+  let tabelBody = document.getElementById("tbody_id")
+  this.dataBase.forEach((value, index, arr) => {
+    let tr = document.createElement('tr')
+    tr.setAttribute('id', `tr_${index}`);
+    tabelBody.appendChild(tr);
+        this.createElement(value, 'name', index)
+        this.createElement(value, 'surname', index)
+        this.createElement(value, 'numb', index)
+      })
+}
+
 const myApp = new PhoneApp();
 myApp.editUser(`Petiya`,`Petrov`, `0993378130`)
 myApp.editUser(`Alex`,`Petrov`, `0093378130`)
-// myApp.usersRemovingByThernameAndName('Petrov')
+myApp.editUser(`Petiya`,`Petrov`, `0993378130`)
+myApp.outputDataArray();
+
 
 
 
