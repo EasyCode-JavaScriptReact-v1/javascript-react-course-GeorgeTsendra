@@ -116,104 +116,13 @@ PhoneApp.prototype.filterUsers = function(property) {
   console.log(filteredArray);
 }
 
-PhoneApp.prototype.createElement = function(value, key, index){
-  let td = document.createElement('td');
-  let rtById = document.getElementById(`tr_${index}`)
-  rtById.appendChild(td)
-  td.textContent = value[key]
-}
 
-PhoneApp.prototype.outputDataArray = function() {
-  let tabelBody = document.getElementById("tbody_id")
-  this.dataBase.forEach((value, index, arr) => {
-    let tr = document.createElement('tr')
-    tr.setAttribute('id', `tr_${index}`);
-    tabelBody.appendChild(tr);
-        this.createElement(value, 'name', index)
-        this.createElement(value, 'surname', index)
-        this.createElement(value, 'numb', index)
-      })
-}
 
 const myApp = new PhoneApp();
 myApp.editUser(`Petiya`,`Petrov`, `0993378130`)
 myApp.editUser(`Alex`,`Petrov`, `0093378130`)
 myApp.editUser(`Petiya`,`Petrov`, `0993378130`)
 
-let createTh = (arr) => {
-  const innerTr = arr.map(value =>
-    `<td>${value}</td>`
-  ).join('');
-  return `<thead><tr>
-    ${innerTr}
-  </tr></thead>`
-}
-let createNav = (classes, context, bull) => {
 
-  if (bull) {
-    return ` <span class="${classes} aria-hidden="${bull}"">${context}</span>`
-  }else {
-    return ` <span class="${classes}">${context}</span>`
-  }
 
-}
-createNav([])
-let buildHtmlTags = () => {
-  let body = document.body;
-
-  body.innerHTML += `<header class="header">
-		<div class="container top-radius">
-			<h2>Contacts</h2>
-		</div>
-	</header>
-  <main>
-		<div class="container">
-    <form class="form-inline search-form">
-      <div class="form-group">
-        <label class="sr-only" for="search">Search</label>
-        <input type="text" class="form-control" id= "search" placeholder="Search">
-      </div>
-    </form>
-    <table class="table table-hover contacts">
-
-        ${createTh(['Name',"Last name", "Number"])}
-
-      <tbody id="tbody_id">
-      </tbody>
-  </table>
-    </div>
-	</main>
-  <footer class="footer">
-    <div class="container bottom-radius">
-      <nav class="main-nav">
-        <a href="index.html" class="tab active">
-          ${createNav("glyphicon glyphicon-search", ``,`true`)}
-          ${createNav("tab-text", `Context`)}
-        </a>
-        <a href="keypad.html" class="tab">
-
-            ${createNav("glyphicon glyphicon-th", ``,`true`)}
-            ${createNav("tab-text", `Keypad`)}
-        </a>
-        <a href="edit-contact.html" class="tab">
-
-          ${createNav("glyphicon glyphicon-pencil", ``,`true`)}
-          ${createNav("tab-text", `Edit contact`)}
-        </a>
-        <a href="user.html" class="tab">
-
-          ${createNav("glyphicon glyphicon-user", ``,`true`)}
-          ${createNav("tab-text", `User`)}
-        </a>
-        <a href="add-user.html" class="tab">
-          ${createNav("glyphicon glyphicon-plus", ``,`true`)}
-          ${createNav("tab-text", `Add user`)}
-        </a>
-      </nav>
-    </div>
-  </footer>`
-}
-
-console.log(myApp);
-buildHtmlTags()
-myApp.outputDataArray();
+// console.log(myApp);
