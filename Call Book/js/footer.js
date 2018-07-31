@@ -1,46 +1,52 @@
-let createNav = (classes, context, bull) => {
 
-  if (bull) {
-    return ` <span class="${classes} aria-hidden="${bull}"">${context}</span>`
-  }else {
-    return ` <span class="${classes}">${context}</span>`
+class Footer{
+
+  constructor(){
+
+  }
+   createNav (classes, context, bull)  {
+
+    if (bull) {
+      return ` <span class="${classes} aria-hidden="${bull}"">${context}</span>`
+    }else {
+      return ` <span class="${classes}">${context}</span>`
+    }
+
   }
 
+  footerOutput (){
+    let main = document.getElementById('app')
+   main.innerHTML += `
+   <footer class="footer">
+     <div class="container bottom-radius">
+       <nav class="main-nav">
+         <a href="index.html" class="tab active">
+           ${this.createNav("glyphicon glyphicon-search", ``,`true`)}
+           ${this.createNav("tab-text", `Context`)}
+         </a>
+         <a href="keypad.html" class="tab">
+
+             ${this.createNav("glyphicon glyphicon-th", ``,`true`)}
+             ${this.createNav("tab-text", `Keypad`)}
+         </a>
+         <a href="edit-contact.html" class="tab">
+
+           ${this.createNav("glyphicon glyphicon-pencil", ``,`true`)}
+           ${this.createNav("tab-text", `Edit contact`)}
+         </a>
+         <a href="user.html" class="tab">
+
+           ${this.createNav("glyphicon glyphicon-user", ``,`true`)}
+           ${this.createNav("tab-text", `User`)}
+         </a>
+         <a href="add-user.html" class="tab">
+           ${this.createNav("glyphicon glyphicon-plus", ``,`true`)}
+           ${this.createNav("tab-text", `Add user`)}
+         </a>
+       </nav>
+     </div>
+   </footer>`
+ }
 }
-
-let footerOutput = ()=>{
-
-  let main = document.getElementById('app')
-
-  main.innerHTML += `<footer class="footer">
-    <div class="container bottom-radius">
-      <nav class="main-nav">
-        <a href="index.html" class="tab active">
-          ${createNav("glyphicon glyphicon-search", ``,`true`)}
-          ${createNav("tab-text", `Context`)}
-        </a>
-        <a href="keypad.html" class="tab">
-
-            ${createNav("glyphicon glyphicon-th", ``,`true`)}
-            ${createNav("tab-text", `Keypad`)}
-        </a>
-        <a href="edit-contact.html" class="tab">
-
-          ${createNav("glyphicon glyphicon-pencil", ``,`true`)}
-          ${createNav("tab-text", `Edit contact`)}
-        </a>
-        <a href="user.html" class="tab">
-
-          ${createNav("glyphicon glyphicon-user", ``,`true`)}
-          ${createNav("tab-text", `User`)}
-        </a>
-        <a href="add-user.html" class="tab">
-          ${createNav("glyphicon glyphicon-plus", ``,`true`)}
-          ${createNav("tab-text", `Add user`)}
-        </a>
-      </nav>
-    </div>
-  </footer>`
-}
-
-footerOutput()
+let myFooter = new Footer()
+myFooter.footerOutput()
