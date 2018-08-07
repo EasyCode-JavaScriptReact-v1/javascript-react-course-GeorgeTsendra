@@ -32,10 +32,29 @@ class Context {
       surname: "Ivanov",
       numb: `(099)33-78-130`
     },
+    {
+      id: 6,
+      name: 'Dima',
+      surname: "Dimonov",
+      numb: `(099)33-78-130`
+    }
   ]
   }
 
+  searchUsers(username) {
+    let allUsers = [];
+    this.dataBase.forEach((value, index, arr)=> {
 
+      if (value.name == username) {
+        allUsers.push(this.dataBase[index]);
+
+      }
+    })
+
+    this.dataBase = allUsers
+    this.buildHtmlTags()
+    return this.dataBase
+  }
 
 
   createTh(arr){
@@ -50,7 +69,7 @@ class Context {
 
   buildHtmlTags (){
     let main = document.getElementById('app')
-    main.innerHTML += `<header class="header">
+    main.innerHTML = `<header class="header">
   		<div class="container top-radius">
   			<h2>Contacts</h2>
   		</div>
@@ -73,6 +92,18 @@ class Context {
       </div>
   	</main>`
     this.outputDataArray(this.dataBase)
+
+
+    let formToSearch = document.querySelector(".form-control")
+
+    window.addEventListener("keydown", e => {
+
+      if (e.keyCode == 13) {
+        this.searchUsers(`${formToSearch.value}`)
+      }
+      // console.log(`${formToSearch.value}`);
+    })
+    this.checkUser()
   }
 
   createElement (value, key, index){
@@ -87,6 +118,7 @@ class Context {
     options.forEach((value, index, arr) => {
       let tr = document.createElement('tr')
       tr.setAttribute('id', `tr_${index}`);
+      tr.setAttribute('class', `tr_class`);
       tabelBody.appendChild(tr);
           this.createElement(value, 'name', index)
           this.createElement(value, 'surname', index)
@@ -103,6 +135,30 @@ class Context {
       tabelBody.innerHTML = "";
       return   this.outputDataArray(newArray)
   }
+
+  checkUser(){
+    let allTr = document.querySelectorAll(".tr_class")
+    allTr.forEach((tr, index, arr)=>{
+      tr.addEventListener("click", a =>{
+        let allTd = tr.querySelectorAll("td")
+        
+        let innerTdName = allTd[0].innerHTML
+        let innerTdSurname = allTd[1].innerHTML
+        let innerTdNumber = allTd[2].innerHTML
+
+        console.log(innerTdName);
+        console.log(innerTdSurname);
+        console.log(innerTdNumber);
+
+      })
+    })
+
+
+  }
+
+
+
+
 }
 
 

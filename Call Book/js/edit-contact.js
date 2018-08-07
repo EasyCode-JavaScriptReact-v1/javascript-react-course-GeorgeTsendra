@@ -35,7 +35,7 @@ class EditContact {
   editContactPageOutput(){
     let main = document.getElementById('app')
 
-    main.innerHTML += `<header class="header">
+    main.innerHTML = `<header class="header">
   		<div class="container top-radius">
   			<nav class="user-top-line">
   				<a href="user.html">Cansel</a>

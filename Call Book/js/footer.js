@@ -15,8 +15,8 @@ class Footer{
   }
 
   footerOutput (){
-    let main = document.getElementById('app')
-   main.innerHTML += `
+    let footer = document.getElementById('footer')
+   footer.innerHTML = `
    <footer class="footer">
      <div class="container bottom-radius">
        <nav class="main-nav">
